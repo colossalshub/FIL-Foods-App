@@ -1,0 +1,50 @@
+{
+  "summary": {
+    "title": "F.I.L. Food Application Security Threat Model",
+    "owner": "Group 4 - III-BCSAD",
+    "description": "OWASP Threat Dragon Model for F.I.L. Food System Architecture (Task 6)"
+  },
+  "detail": {
+    "diagrams": [
+      {
+        "title": "Level 1 System Decomposition",
+        "id": 0,
+        "diagramType": "STRIDE",
+        "cells": [
+          { "type": "tm.Actor", "name": "Client App (Android)" },
+          { "type": "tm.Process", "name": "1.0 API Gateway" },
+          { "type": "tm.Process", "name": "2.0 Auth & Token Service" },
+          { "type": "tm.Process", "name": "3.0 Order & Dietary Profile Service" },
+          { "type": "tm.Store", "name": "D1 PostgreSQL Production DB (Asset A-02)" },
+          { "type": "tm.Store", "name": "D2 Redis Session Cache" },
+          { "type": "tm.Boundary", "name": "TB1: Untrusted Client -> Public Edge" },
+          { "type": "tm.Boundary", "name": "TB2: Edge Ingress -> Internal Microservices" },
+          { "type": "tm.Boundary", "name": "TB3: Compute -> Persistence Layer" }
+        ],
+        "threats": [
+          {
+            "title": "THREAT-01: Spoofing on ordering endpoints",
+            "type": "Spoofing",
+            "status": "Mitigated",
+            "severity": "High",
+            "description": "Automated spoofed request flooding targeting public API gateway."
+          },
+          {
+            "title": "THREAT-02: BOLA on Dietary Profile Endpoint",
+            "type": "Information Disclosure",
+            "status": "Mitigated",
+            "severity": "Critical",
+            "description": "Broken Object Level Authorization exposing Asset A-02 health records."
+          },
+          {
+            "title": "THREAT-03: SQL Injection on Auth Service",
+            "type": "Tampering",
+            "status": "Mitigated",
+            "severity": "High",
+            "description": "Unparameterized query execution against user credentials table."
+          }
+        ]
+      }
+    ]
+  }
+}

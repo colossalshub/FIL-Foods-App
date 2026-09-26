@@ -1,0 +1,22 @@
+title = "F.I.L Food gitleaks config"
+
+[[rules]]
+id = "aws-access-key"
+description = "AWS Access Key"
+regex = '''AKIA[0-9A-Z]{16}'''
+
+[[rules]]
+id = "jwt-secret"
+description = "Hardcoded JWT signing secret"
+regex = '''(?i)jwt_secret\s*=\s*['"]?[a-zA-Z0-9_]{16,}['"]?'''
+
+[[rules]]
+id = "paymongo-key"
+description = "PayMongo secret key"
+regex = '''sk_(live|test)_[A-Za-z0-9]{24,}'''
+
+[allowlist]
+paths = [
+    '''\.gitleaks\.toml''',
+    '''node_modules'''
+]
